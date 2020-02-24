@@ -8,18 +8,28 @@
        PROGRAM-ID. DOUBLE-FOR-LOOP.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-           01 I            PIC 9(1).
-           01 J            PIC 9(1).
-           01 WS-RESULT    PIC 9(1).
+           01 WS-TABLE.
+               05 WS-i OCCURS 3 TIMES.
+                   10 WS-i1 PIC A(1) VALUE 'X'.
+                   10 WS-i2 PIC A(1) VALUE 'Y'.
+                   10 WS-j OCCURS 2 TIMES.
+                       15 WS-j1 PIC A(1) VALUE 'A'.
+                       15 WS-j2 PIC A(1) VALUE 'B'.
+                       15 WS-j3 PIC A(1) VALUE 'C'.
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
-           PERFORM A-PARA VARYING I FROM 1 BY 1 UNTIL I>3.
-           STOP RUN.
-
-           A-PARA.
-               PERFORM B-PARA VARYING J FROM 1 BY 1 UNTIL J>2.
-
-           B-PARA.
-               COMPUTE WS-RESULT = I * J.
-               DISPLAY I ' * ' J ' = ' WS-RESULT.
+           *> WS-i will occur 3 times, every time WS-i occurs, display 'X''Y'
+           *> then WS-j will occur 2 times, every time WS-j occurs, display 'A''B''C'
+      ******************************************************************
+      *for (int i=0;i<3;i++) {
+      *    Display 'X'.
+      *    Display 'Y'.
+      *    for (int j=0;j<2;j++) {
+      *        Display 'A'.
+      *        Display 'B'.
+      *        Display 'C'.
+      *    }
+      *}
+      ******************************************************************
+           DISPLAY "Two dimensional table : " WS-TABLE.
        END PROGRAM DOUBLE-FOR-LOOP.
